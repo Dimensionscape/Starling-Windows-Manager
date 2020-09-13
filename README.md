@@ -12,7 +12,7 @@ While possible to create auxiliary windows without the primary window utilizing 
 	StarlingWindowsManager.createStaringWindow(new StarlingWindowConfiguration(new StarlingConfiguration("Main")).start();
 
   //Create new StarlingWindow from current stages NativeWindow
-	StarlingWindowsManager.createStarlingFromWindow("Main", Director, stage.nativeWindow).start();
+	StarlingWindowsManager.createStarlingFromWindow("Main", Sprite, stage.nativeWindow).start();
 
 ```
 # Warning:
