@@ -41,6 +41,8 @@
 		function set visible(value:Boolean):void;
 		function get autoSizeStage(): Boolean;
 		function set autoSizeStage(bool:Boolean):void;
+		function get autoActivate(): Boolean;
+		function set autoActivate(bool:Boolean):void;
 	}
 
 }
