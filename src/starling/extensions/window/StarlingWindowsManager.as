@@ -41,7 +41,7 @@
 		}		
 
 		public static function removeStarlingWindow(id: String): void {
-			if(StarlingWindow(__starlingMap[id])._starling.nativeStage.hasEventListener(feathers.events.Event.EXIT_FRAME) __starlingMap[id]._starling.nativeStage.removeEventListener(feathers.events.Event.EXIT_FRAME, __onExitFrame);
+			if(StarlingWindow(__starlingMap[id])._starling.nativeStage.hasEventListener(feathers.events.Event.EXIT_FRAME)) __starlingMap[id]._starling.nativeStage.removeEventListener(feathers.events.Event.EXIT_FRAME, __onExitFrame);
 			__starlingCollection.removeAt(__starlingCollection.indexOf(__starlingMap[id]._starling));
 			__starlingMap[id] = null;
 			delete __starlingMap[id];
