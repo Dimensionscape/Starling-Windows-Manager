@@ -1,5 +1,5 @@
 # Starling-Windows-Manager
-Starling Windows Manager is extension for Starling that simplifies the utilization of multiple windows without the headache of maintaining current starling instance.
+Starling Windows Manager is an extension for Starling that simplifies the utilization of multiple windows without the headache of maintaining current starling instance.
 
 Both primary StarlingWindow creation methods create their own starling instance. Configure the starling instance with StarlingConfiguration and configure the window using the StaringWindowConfiguration class.
 
