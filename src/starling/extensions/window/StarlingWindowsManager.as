@@ -38,27 +38,15 @@
 			
 			} else throw ("Duplicate Starling id is not allowed. Pass true as the overwrite argument to bypass.");
 			return starlingWindow.starling;
-		}
-		
-		public static function createStarling(id: String, rootClass: Class, stage: Stage, viewport: Rectangle = null, onContextCreated: Function = null, onRootCreated: Function = null, 
-		overwrite: Boolean = false): Starling {
-
-			if (__starlingMap[id] == undefined || overwrite) {
-				if (overwrite) removeStarling(id);
-				__starlingMap[id] = new Starling(rootClass, stage, viewport);
-				if (onRootCreated != null) __starlingMap[id].addEventListener(starling.events.Event.ROOT_CREATED, onRootCreated)
-				if (onContextCreated != null) __starlingMap[id].addEventListener(starling.events.Event.CONTEXT3D_CREATE, onContextCreated);
-				if (__starlingCollection.length == 0) stage.addEventListener(flash.events.Event.EXIT_FRAME, __onExitFrame);
-				__starlingCollection.push(__starlingMap[id]);
-				return __starlingMap[id];
-			} else throw ("Duplicate Starling id is not allowed. Pass true as the overwrite argument to bypass.");
-
-		}
+		}		
 
 		public static function removeStarling(id: String): void {
-			__starlingCollection.removeAt(__starlingCollection.indexOf(__starlingMap[id]));
+			if(StarlingWindow(__starlingMap[id])._starling.nativeStage.hasEventListener(feathers.events.Event.EXIT_FRAME) __starlingMap[id]._starling.nativeStage.removeEventListener(feathers.events.Event.EXIT_FRAME, __onExitFrame);
+			__starlingCollection.removeAt(__starlingCollection.indexOf(__starlingMap[id]._starling));
 			__starlingMap[id] = null;
 			delete __starlingMap[id];
+			if (__starlingCollection.length == 0) __starlingCollection[0].addEventListener(flash.events.Event.EXIT_FRAME, __onExitFrame);
+
 		}
 
 		public static function setViewport(id: String, rect: Rectangle): void {
