@@ -1,4 +1,4 @@
-﻿package starling.extensions.managers {
+﻿package starling.extensions.window {
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import flash.geom.Rectangle;

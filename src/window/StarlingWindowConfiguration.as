@@ -1,4 +1,4 @@
-﻿package starling.extensions.managers {
+﻿package starling.extensions.window {
 	import flash.display.NativeWindowType;
 	import flash.display.NativeWindowSystemChrome;
 	import flash.display.NativeWindowInitOptions;

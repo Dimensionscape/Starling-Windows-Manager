@@ -1,4 +1,4 @@
-﻿package starling.extensions.  {
+﻿package starling.extensions.window  {
 	import flash.display.NativeWindow;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowRenderMode;
