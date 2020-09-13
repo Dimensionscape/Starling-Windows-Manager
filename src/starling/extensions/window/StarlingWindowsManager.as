@@ -40,7 +40,7 @@
 			return starlingWindow.starling;
 		}		
 
-		public static function removeStarling(id: String): void {
+		public static function removeStarlingWindow(id: String): void {
 			if(StarlingWindow(__starlingMap[id])._starling.nativeStage.hasEventListener(feathers.events.Event.EXIT_FRAME) __starlingMap[id]._starling.nativeStage.removeEventListener(feathers.events.Event.EXIT_FRAME, __onExitFrame);
 			__starlingCollection.removeAt(__starlingCollection.indexOf(__starlingMap[id]._starling));
 			__starlingMap[id] = null;
@@ -58,7 +58,7 @@
 		}
 
 		public static function makeCurrent(id: String): void {
-			if (__starlingMap[id] != undefined) __starlingMap[id].makeCurrent();
+			if (__starlingMap[id] != undefined) __starlingMap[id].starling.makeCurrent();
 		}
 
 		private static function __onRootCreated(onRootCreated: Function, onRootCreatedFunction: Function = null): Function {
