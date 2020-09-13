@@ -48,13 +48,18 @@
 			if (__starlingCollection.length == 0) __starlingCollection[0].addEventListener(flash.events.Event.EXIT_FRAME, __onExitFrame);
 
 		}
-
-		public static function setViewport(id: String, rect: Rectangle): void {
-
+		
+		public static function getStarlingWindow(id:String):StarlingWindow{
+			return __starlingMap[id];
 		}
 
-		public static function setStageDimensions(stageWidth: int, stageHeight: int): void {
+		public static function setViewPort(id: String, rect: Rectangle): void {
+			__starlingMap[id].staring.viewPort = rect;
+		}
 
+		public static function setStageDimensions(id:String, stageWidth: int, stageHeight: int): void {
+			__starlingMap[id].starling.stage.stageWidth = stageWidth;
+			__starlingMap[id].starling.stage.stageHeight = stageHeight;
 		}
 
 		public static function makeCurrent(id: String): void {
