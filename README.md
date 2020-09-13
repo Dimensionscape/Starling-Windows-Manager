@@ -15,5 +15,5 @@ While possible to create auxiliary windows without the primary window utilizing 
 	StarlingWindowsManager.createStarlingFromWindow("Main", Director, stage.nativeWindow).start();
 
 ```
-# Warning
+# Warning:
 It is not recommended to use this version for production use. A stable version will be available shortly.
