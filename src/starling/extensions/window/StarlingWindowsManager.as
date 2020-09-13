@@ -15,7 +15,7 @@
 		public static function createStaringWindow(starlingWindowConfiguration:StarlingWindowConfiguration, overwrite:Boolean = false):Starling{		
 			var starlingWindow:StarlingWindow = new StarlingWindow(starlingWindowConfiguration);
 			if(__starlingMap[starlingWindow.id] == undefined || overwrite){		
-				if (overwrite) removeStarling(starlingWindow.id);
+				if (overwrite) removeStarlingWindow(starlingWindow.id);
 				__starlingMap[starlingWindow.id] = starlingWindow;	
 				__starlingCollection.push(starlingWindow.starling);
 				//if (starlingWindowConfiguration.starlingConfiguration.onRootCreated != null) starlingWindow.starling.addEventListener(starling.events.Event.ROOT_CREATED, onRootCreated)
@@ -29,7 +29,7 @@
 		onRootCreated:Function = null, overwrite:Boolean = false):Starling{
 			var starlingWindow:StarlingWindow = StarlingWindow.fromNativeWindow(id, nativeWindow); 
 			if(__starlingMap[id] == undefined || overwrite){		
-				if (overwrite) removeStarling(starlingWindow.id);
+				if (overwrite) removeStarlingWindow(starlingWindow.id);
 				starlingWindow._starling = new Starling(rootClass, nativeWindow.stage, viewPort);
 				__starlingCollection.push((__starlingMap[id] = starlingWindow)._starling);
 				if (onRootCreated != null) starlingWindow.starling.addEventListener(starling.events.Event.ROOT_CREATED, onRootCreated)
@@ -41,7 +41,7 @@
 		}		
 
 		public static function removeStarlingWindow(id: String): void {
-			if(StarlingWindow(__starlingMap[id])._starling.nativeStage.hasEventListener(feathers.events.Event.EXIT_FRAME)) __starlingMap[id]._starling.nativeStage.removeEventListener(feathers.events.Event.EXIT_FRAME, __onExitFrame);
+			if(StarlingWindow(__starlingMap[id])._starling.nativeStage.hasEventListener(flash.events.Event.EXIT_FRAME)) __starlingMap[id]._starling.nativeStage.removeEventListener(flash.events.Event.EXIT_FRAME, __onExitFrame);
 			__starlingCollection.removeAt(__starlingCollection.indexOf(__starlingMap[id]._starling));
 			__starlingMap[id] = null;
 			delete __starlingMap[id];
