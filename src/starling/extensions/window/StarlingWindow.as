@@ -22,7 +22,6 @@
 		}
 		public function StarlingWindow(starlingWindowConfiguration:StarlingWindowConfiguration) {
 			if(starlingWindowConfiguration!=null) __fromConfiguration(starlingWindowConfiguration);
-			//else __fromNativeWindow();
 		}
 		
 		public static function fromNativeWindow(id:String, nativeWindow:NativeWindow):StarlingWindow{
@@ -32,9 +31,10 @@
 			return starlingWindow;
 		}
 		
-		//private function __fromNativeWindow():void{
-		//	
-		//}
+		override public function set alwaysInFront(bool:Boolean):void{
+			super.alwaysInFront = _nativeWindow.alwaysInFront = bool;
+			
+		}
 		
 		private function __fromConfiguration(starlingWindowConfiguration:StarlingWindowConfiguration):void{
 			__setNativeWindowInitOptions(starlingWindowConfiguration);
@@ -45,6 +45,7 @@
 		}
 		
 		private function __configureStarlingWindow(config:StarlingWindowConfiguration):void{
+			this.id = config.starlingConfiguration.id;
 			_nativeWindow.alwaysInFront = config.alwaysInFront;
 			_nativeWindow.width = config.width;
 			_nativeWindow.height = config.height;			
