@@ -50,6 +50,42 @@
 			if(type == StarlingWindowEvent.ACTIVATE) _nativeWindow.removeEventListener(StarlingWindowEvent.ACTIVATE, __onWindowActivate);
 		}
 		
+		
+		public function activate():void{
+			_nativeWindow.activate();
+		}
+		
+		public function close():void{
+			_nativeWindow.close();
+		}
+		
+		public function maximize():void{
+			_nativeWindow.maximize();			
+		}
+		
+		public function minimize():void{
+			_nativeWindow.minimize();
+		}
+		
+		public function orderToFront():void{
+			_nativeWindow.orderToFront();
+		}
+		
+		public function orderToBack():void{
+			_nativeWindow.orderToBack();
+		}
+		
+		public function orderToFrontOf(starlingWindow:StarlingWindow):void{
+			_nativeWindow.orderInFrontOf(starlingWindow._nativeWindow);
+		}
+		
+		public function orderToBackOf(starlingWindow:StarlingWindow):void{
+			_nativeWindow.orderInBackOf(starlingWindow._nativeWindow);
+		}
+		
+		public function restore():void{
+			_nativeWindow.restore();
+		}
 		private function __onWindowActivate(e):void{
 			super.dispatchEvent(new StarlingWindowEvent(StarlingWindowEvent.ACTIVATE));
 		}
