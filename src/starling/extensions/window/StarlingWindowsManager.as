@@ -52,6 +52,13 @@
 		public static function getStarlingWindow(id:String):StarlingWindow{
 			return __starlingMap[id];
 		}
+		
+		public static function getStarlingWindowByStarling(starling:Starling):StarlingWindow{
+			for each(var starlingWindow:StarlingWindow in __starlingMap){
+				if(starlingWindow.starling === starling) return starlingWindow;
+			}
+			return null;
+		}
 
 		public static function setViewPort(id: String, rect: Rectangle): void {
 			__starlingMap[id].staring.viewPort = rect;

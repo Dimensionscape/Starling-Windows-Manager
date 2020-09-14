@@ -41,15 +41,18 @@
 		}		
 		
 		override public function addEventListener(type:String, listener:Function):void{
-			trace(this.id);
-			if(type == StarlingWindowEvent.ACTIVATE) _nativeWindow.addEventListener(StarlingWindowEvent.ACTIVATE, __onWindowActivate);			
+			if(type == StarlingWindowEvent.ACTIVATE) _nativeWindow.addEventListener(StarlingWindowEvent.ACTIVATE, __onWindowActivate);
+			else if(type == StarlingWindowEvent.DEACTIVATE) _nativeWindow.addEventListener(StarlingWindowEvent.DEACTIVATE, __onWindowDeactivate); 
+			else if(type == StarlingWindowEvent.DISPLAY_STATE_CHANGE) _nativeWindow.addEventListener(StarlingWindowEvent.DISPLAY_STATE_CHANGE, __onDisplayStateChange);
 			super.addEventListener(type, listener);
 		}
 		
 		override public function removeEventListener(type:String, listener:Function):void{
 			if(type == StarlingWindowEvent.ACTIVATE) _nativeWindow.removeEventListener(StarlingWindowEvent.ACTIVATE, __onWindowActivate);
-		}
-		
+			else if(type == StarlingWindowEvent.DEACTIVATE) _nativeWindow.removeEventListener(StarlingWindowEvent.DEACTIVATE, __onWindowDeactivate);
+			else if(type == StarlingWindowEvent.DISPLAY_STATE_CHANGE) _nativeWindow.removeEventListener(StarlingWindowEvent.DISPLAY_STATE_CHANGE, __onDisplayStateChange);
+			super.removeEventListener(type, listener);
+		}		
 		
 		public function activate():void{
 			_nativeWindow.activate();
@@ -67,20 +70,21 @@
 			_nativeWindow.minimize();
 		}
 		
-		public function orderToFront():void{
-			_nativeWindow.orderToFront();
+		public function orderToFront():Boolean{
+			return _nativeWindow.orderToFront();
 		}
 		
-		public function orderToBack():void{
-			_nativeWindow.orderToBack();
+		public function orderToBack():Boolean{
+			return _nativeWindow.orderToBack();
 		}
 		
-		public function orderToFrontOf(starlingWindow:StarlingWindow):void{
-			_nativeWindow.orderInFrontOf(starlingWindow._nativeWindow);
+		public function orderToFrontOf(starlingWindow:StarlingWindow):Boolean{
+			return _nativeWindow.orderInFrontOf(starlingWindow._nativeWindow);
 		}
 		
-		public function orderToBackOf(starlingWindow:StarlingWindow):void{
-			_nativeWindow.orderInBackOf(starlingWindow._nativeWindow);
+		public function orderToBackOf(starlingWindow:StarlingWindow):Boolean{
+			return _nativeWindow.orderInBackOf(starlingWindow._nativeWindow);
+			
 		}
 		
 		public function restore():void{
@@ -90,6 +94,14 @@
 			super.dispatchEvent(new StarlingWindowEvent(StarlingWindowEvent.ACTIVATE));
 		}
 		
+		private function __onWindowDeactivate(e):void{
+			super.dispatchEvent(new StarlingWindowEvent(StarlingWindowEvent.DEACTIVATE));
+		}
+		
+		private function __onDisplayStateChange(e):void{
+			super.dispatchEvent(new StarlingWindowEvent(StarlingWindowEvent.DISPLAY_STATE_CHANGE, false, e.afterDisplayState));
+			
+		}
 		
 		private function __fromConfiguration(starlingWindowConfiguration:StarlingWindowConfiguration):void{
 			__setNativeWindowInitOptions(starlingWindowConfiguration);
@@ -123,6 +135,7 @@
 			options.systemChrome = config.systemChrome;
 			options.transparent = config.transparent;
 			options.type = config.type;		
+			options.owner = config.owner;
 		}
 		
 		private function __createStarling(starlingConfiguration:StarlingConfiguration):void{			

@@ -1,5 +1,6 @@
 ﻿package starling.extensions.window {
 	import starling.events.EventDispatcher;
+	import flash.display.NativeWindow;
 
 	public class BaseStarlingWindow extends EventDispatcher implements IStarlingWindow {
 
@@ -24,6 +25,7 @@
 		private var _visible: Boolean;
 		private var _autoSizeStage:Boolean;
 		private var _autoActivate:Boolean;
+		private var _owner:NativeWindow; 
 		
 		public function get id(): String{
 			return _id;
@@ -150,6 +152,12 @@
 		}
 		public function set autoActivate(bool:Boolean):void{
 			_autoActivate = bool;
+		}
+		public function get owner(): NativeWindow {
+			return _owner;
+		}
+		public function set owner(nativeWindow: NativeWindow): void {
+			_owner = nativeWindow;
 		}
 
 	}
