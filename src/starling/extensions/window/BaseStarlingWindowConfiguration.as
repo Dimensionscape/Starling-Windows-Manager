@@ -1,7 +1,6 @@
 ﻿package starling.extensions.window {
-	import starling.events.EventDispatcher;
-
-	public class BaseStarlingWindow extends EventDispatcher implements IStarlingWindow {
+	
+	public class BaseStarlingWindowConfiguration implements IStarlingWindow {
 
 		private var _id:String;
 		private var _x: int;

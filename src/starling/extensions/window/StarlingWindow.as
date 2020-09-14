@@ -12,7 +12,14 @@
 	public class StarlingWindow extends BaseStarlingWindow{
 		internal var _starling:Starling;
 		private var _nativeWindow:NativeWindow;
-
+		
+		public static function fromNativeWindow(id:String, nativeWindow:NativeWindow):StarlingWindow{
+			var starlingWindow:StarlingWindow = new StarlingWindow(null);
+			starlingWindow._nativeWindow = nativeWindow;			
+			starlingWindow.id = id;
+			return starlingWindow;
+		}		
+		
 		public function get starling():Starling{
 			return _starling;
 		}
@@ -20,21 +27,33 @@
 		public function get nativeWindow():NativeWindow{
 			return _nativeWindow
 		}
-		public function StarlingWindow(starlingWindowConfiguration:StarlingWindowConfiguration) {
-			if(starlingWindowConfiguration!=null) __fromConfiguration(starlingWindowConfiguration);
-		}
-		
-		public static function fromNativeWindow(id:String, nativeWindow:NativeWindow):StarlingWindow{
-			var starlingWindow:StarlingWindow = new StarlingWindow(null);
-			starlingWindow._nativeWindow = nativeWindow;			
-			starlingWindow.id = id;
-			return starlingWindow;
-		}
 		
 		override public function set alwaysInFront(bool:Boolean):void{
-			super.alwaysInFront = _nativeWindow.alwaysInFront = bool;
-			
+			super.alwaysInFront = _nativeWindow.alwaysInFront = bool;			
 		}
+		
+		override public function set visible(bool:Boolean):void{
+			super.visible = _nativeWindow.visible = bool;
+		}
+		
+		public function StarlingWindow(starlingWindowConfiguration:StarlingWindowConfiguration) {
+			if(starlingWindowConfiguration!=null) __fromConfiguration(starlingWindowConfiguration);
+		}		
+		
+		override public function addEventListener(type:String, listener:Function):void{
+			trace(this.id);
+			if(type == StarlingWindowEvent.ACTIVATE) _nativeWindow.addEventListener(StarlingWindowEvent.ACTIVATE, __onWindowActivate);			
+			super.addEventListener(type, listener);
+		}
+		
+		override public function removeEventListener(type:String, listener:Function):void{
+			if(type == StarlingWindowEvent.ACTIVATE) _nativeWindow.removeEventListener(StarlingWindowEvent.ACTIVATE, __onWindowActivate);
+		}
+		
+		private function __onWindowActivate(e):void{
+			super.dispatchEvent(new StarlingWindowEvent(StarlingWindowEvent.ACTIVATE));
+		}
+		
 		
 		private function __fromConfiguration(starlingWindowConfiguration:StarlingWindowConfiguration):void{
 			__setNativeWindowInitOptions(starlingWindowConfiguration);

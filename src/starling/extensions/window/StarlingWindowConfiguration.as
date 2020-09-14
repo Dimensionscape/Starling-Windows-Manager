@@ -3,7 +3,7 @@
 	import flash.display.NativeWindowSystemChrome;
 	import flash.display.NativeWindowInitOptions;
 
-	public class StarlingWindowConfiguration extends BaseStarlingWindow{
+	public class StarlingWindowConfiguration extends BaseStarlingWindowConfiguration{
 		
 		public var starlingConfiguration:StarlingConfiguration;
 
